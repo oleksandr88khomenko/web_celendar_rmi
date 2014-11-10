@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.khomenko.calendar.security"/>
+
+    <security:global-method-security pre-post-annotations="enabled"/>
+
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider user-service-ref="agentDetailsService">
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <bean id="authenticationEntryPoint" class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint">
+        <!--<constructor-arg name="loginFormUrl" value="/gate/login"/>-->
+    </bean>
+
+    <bean id="authenticationSuccessHandler" class="com.khomenko.calendar.security.AuthenticationSuccessHandler"/>
+
+    <bean id="authenticationFailureHandler" class="com.khomenko.calendar.security.AuthenticationFailureHandler"/>
+
+    <bean id="authenticationFilter" class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="authenticationSuccessHandler" ref="authenticationSuccessHandler"/>
+        <property name="authenticationFailureHandler" ref="authenticationFailureHandler"/>
+        <property name="usernameParameter" value="username"/>
+        <property name="passwordParameter" value="password"/>
+        <property name="filterProcessesUrl" value="/login"/>
+    </bean>
+
+    <security:http auto-config="false" create-session="always" use-expressions="true"
+                   entry-point-ref="authenticationEntryPoint">
+        <security:custom-filter position="FORM_LOGIN_FILTER" ref="authenticationFilter"/>
+        <security:intercept-url pattern="/login" access="permitAll"/>
+        <security:intercept-url pattern="/**" access="isAuthenticated()"/>
+        <security:logout logout-url="/logout" logout-success-url="/login" />
+        <security:form-login login-page="/login" default-target-url="/calendar"
+                    authentication-failure-url="/error" />
+        <security:anonymous username="guest" granted-authority="ROLE_ANONYMOUS" />
+    </security:http>
+
+</beans>
