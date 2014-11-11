@@ -9,7 +9,6 @@
     <!-- DispatcherServlet Context: определяет настройки одного сервлета; бины,
             которые доступны только ему -->
 
-
     <bean name="calendarService" class="com.diosoft.training.project.service.CalendarServiceImp"/>
 
     <bean name="/calendarService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">

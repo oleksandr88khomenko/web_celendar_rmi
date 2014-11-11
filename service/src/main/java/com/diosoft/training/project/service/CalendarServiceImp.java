@@ -31,10 +31,6 @@ public class CalendarServiceImp implements CalendarService {
 
     }
 
-    public CalendarServiceImp(EventDAO eventDAO) {
-        this.eventDAO = eventDAO;
-    }
-
     @Override
     public List<Event> findAllEvents() {
         return eventDAO.findAll();
@@ -42,7 +38,7 @@ public class CalendarServiceImp implements CalendarService {
 
     @Override
     public void addEvent(Event event) {
-        event.set_id(sequenceDAO.getNextSequenceId("event"));
+        event.set_id(sequenceDAO.getNextSequenceId("events"));
         eventDAO.add(event);
     }
 

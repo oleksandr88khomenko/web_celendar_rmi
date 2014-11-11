@@ -39,6 +39,7 @@
             <property name="calendarService" ref="httpInvokerProxy"/>
 
     </bean>
+
     <bean id="httpInvokerProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
         <property name="serviceUrl" value="http://localhost:8080/dataservice/calendarservice"/>
         <property name="serviceInterface" value="com.diosoft.training.project.service.CalendarService"/>
