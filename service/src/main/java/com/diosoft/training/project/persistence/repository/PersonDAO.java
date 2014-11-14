@@ -1,4 +1,4 @@
-package com.diosoft.training.project.persistence;
+package com.diosoft.training.project.persistence.repository;
 
 import com.diosoft.training.project.persistence.model.Person;
 

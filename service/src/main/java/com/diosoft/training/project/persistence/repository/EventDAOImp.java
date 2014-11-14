@@ -1,4 +1,4 @@
-package com.diosoft.training.project.persistence;
+package com.diosoft.training.project.persistence.repository;
 
 import com.diosoft.training.project.persistence.model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +27,13 @@ public class EventDAOImp implements EventDAO {
 
     @Override
     public void add(Event event) {
+//        Event event_ = new Event();
+//        event_.set_id(1L);
+//        event_.setDateFrom(new Date());
+//        event_.setDateTo(new Date());
+//        event_.setDescription("first event");
+//        event_.setTitle("event");
         mongoTemplate.save(event);
-
     }
 
     @Override

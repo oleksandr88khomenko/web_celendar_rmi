@@ -19,7 +19,7 @@
     <context:annotation-config/>
 
     <!-- Определяем папки, в которых будем автоматически искать бины-компоненты (@Component, @Service)  -->
-    <context:component-scan base-package="com.diosoft.training.project"/>
+    <context:component-scan base-package="com.diosoft.training.project.persistence"/>
 
     <!--Определяем property-placeholder для базы данных -->
     <context:property-placeholder location="classpath:db.properties"/>

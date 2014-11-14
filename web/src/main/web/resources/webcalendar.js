@@ -1,7 +1,6 @@
 /**
  * Created by oleksandr_khomenko on 04.11.2014.
  */
-var eventDb = TAFFY();
 
 $(document).ready(function () {
 
@@ -63,8 +62,8 @@ $(document).ready(function () {
 //        }
 //    ]);
 
-    console.log(eventDb().first());
-    var event = eventDb().first();
+//    console.log(eventDb().first());
+//    var event = eventDb().first();
 //
 //    );
 
@@ -119,7 +118,7 @@ $(document).ready(function () {
                         calEvent.title = titleField.val();
                         calEvent.body = bodyField.val();
                         calEvent.attenders = attenders.val();
-                        eventDb.insert({"id": id, "start": new Date(startField.val()), "end": new Date(endField.val()), "title": titleField.val(), "descr": bodyField.val() });
+//                        eventDb.insert({"id": id, "start": new Date(startField.val()), "end": new Date(endField.val()), "title": titleField.val(), "descr": bodyField.val() });
                         console.log(attenders);
                         $calendar.weekCalendar("removeUnsavedEvents");
                         $calendar.weekCalendar("updateEvent", calEvent);
@@ -170,13 +169,13 @@ $(document).ready(function () {
                         calEvent.title = titleField.val();
                         calEvent.body = bodyField.val();
                         calEvent.attenders = attenders.val();
-                        eventDb({"id": id}).update({"start": new Date(startField.val()), "end": new Date(endField.val()), "title": titleField.val(), "descr": bodyField.val() });
+//                        eventDb({"id": id}).update({"start": new Date(startField.val()), "end": new Date(endField.val()), "title": titleField.val(), "descr": bodyField.val() });
                         $calendar.weekCalendar("updateEvent", calEvent);
                         $dialogContent.dialog("close");
                     },
                     "delete": function () {
-                        eventDb({"id": calEvent.id + 1 }).remove();
-                        console.log(eventDb().get());
+//                        eventDb({"id": calEvent.id + 1 }).remove();
+//                        console.log(eventDb().get());
                         console.log(calEvent.id);
                         $calendar.weekCalendar("removeEvent", calEvent.id);
                         $dialogContent.dialog("close");
@@ -219,7 +218,8 @@ $(document).ready(function () {
     function getEventData() {
 
 
-        return  eventDb().get();
+//        return  eventDb().get();
+
 
 //            {
 //                "id": 1,

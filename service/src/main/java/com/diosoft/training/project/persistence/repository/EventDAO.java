@@ -1,4 +1,4 @@
-package com.diosoft.training.project.persistence;
+package com.diosoft.training.project.persistence.repository;
 
 import com.diosoft.training.project.persistence.model.Event;
 
@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * Created by oleksandr_khomenko on 28.10.2014.
  */
+
 public interface EventDAO {
 
     List<Event> findAll();

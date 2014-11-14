@@ -24,7 +24,7 @@
 
     <!-- Всю статику (изображения, css-файлы, javascript) положим в папку webapp/resources
             и замаппим их на урл вида /resources/** -->
-    <mvc:resources mapping="/resources/**" location="WEB-INF/resources/"/>
+    <!--<mvc:resources mapping="/resources/**" location="/WEB-INF/resources/"/>-->
 
     <!-- Отображение видов на jsp-файлы, лежащие в папке /WEB-INF/views -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -32,16 +32,13 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+
     <!-- Файл с настройками контроллеров -->
     <import resource="controllers.xml"/>
 
-    <bean class="com.diosoft.training.project.web.EventController">
-            <property name="calendarService" ref="httpInvokerProxy"/>
-
-    </bean>
-
-    <bean id="httpInvokerProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-        <property name="serviceUrl" value="http://localhost:8080/dataservice/calendarservice"/>
+    <bean id="calendarService" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl" value="http://localhost:8080/service-1/calendarService"/>
         <property name="serviceInterface" value="com.diosoft.training.project.service.CalendarService"/>
     </bean>
 

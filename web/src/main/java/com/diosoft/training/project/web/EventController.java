@@ -1,5 +1,7 @@
 package com.diosoft.training.project.web;
 
+//import com.diosoft.training.project.web.persistence.model.Event;
+//import com.diosoft.training.project.web.persistence.model.Person;
 
 import com.diosoft.training.project.persistence.model.Event;
 import com.diosoft.training.project.persistence.model.Person;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -18,21 +21,58 @@ import java.util.List;
  * Created by oleksandr_khomenko on 28.10.2014.
  */
 @Controller
-@RequestMapping(value = "/webcalendar")
 public class EventController {
 
     @Autowired
     private CalendarService calendarService;
 
-    @RequestMapping(value = "/index", produces = "application/json")
+    @RequestMapping(value = "/find_all_events", method = RequestMethod.GET, produces="application/json")
     @ResponseBody
     private List<Event> findAllEvents() {
+       return calendarService.findAllEvents();
+    }
+//    consumes="application/json"
+    @RequestMapping(value = "/add_event", method = RequestMethod.GET)
+    public void addEvent(@RequestBody String json) {
 
-        return calendarService.findAllEvents();
+        Person sasha = new Person();
+        sasha.setId(2L);
+        sasha.setUsername("sasha");
+        List<Person> list = Arrays.asList(sasha);
+
+        Event event_ = new Event();
+        event_.set_id(3L);
+        event_.setDateFrom(new Date());
+        event_.setDateTo(new Date());
+        event_.setDescription("first event");
+        event_.setTitle("event");
+        event_.setAttenders(list);
+        Event event2 = new Event();
+        event2.set_id(2L);
+        event2.setDateFrom(new Date());
+        event2.setDateTo(new Date());
+        event2.setDescription("first event");
+        event2.setTitle("event");
+        event2.setAttenders(list);
+
+        Event event3 = new Event();
+        event3.set_id(1L);
+        event3.setDateFrom(new Date());
+        event3.setDateTo(new Date());
+        event3.setDescription("first event");
+        event3.setTitle("event");
+        event3.setAttenders(list);
+//        try {
+//            event = new ObjectMapper().readValue(json, Event.class);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        calendarService.addEvent(event_);
+
     }
 
-    @RequestMapping(value = "/add_event", method = RequestMethod.POST)
-    public void addEvent(@RequestBody String json) {
+    @RequestMapping(value = "/update_event")
+    public void updateEvent(@RequestBody String json) {
 
         Event event = null;
         try {
@@ -40,23 +80,22 @@ public class EventController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        calendarService.addEvent(event);
-
+        calendarService.updateEvent(event);
     }
 
     @RequestMapping(value = "/delete_event")
     public void deleteEvent(@RequestBody String json) {
 
-        Event event = null;
-        try {
-            event = new ObjectMapper().readValue(json, Event.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        calendarService.deleteEvent(event);
+        Event event_ = new Event();
+        event_.set_id(3L);
+        event_.setDateFrom(new Date());
+        event_.setDateTo(new Date());
+        event_.setDescription("first event");
+        event_.setTitle("event");
+        calendarService.deleteEvent(event_);
     }
 
-    @RequestMapping(value = "/find_events_for_person/{id}/{start}/{end}")
+    @RequestMapping(value = "/find_events_for_person/{id}/{start}/{end}", produces="application/json" )
     @ResponseBody
     public List<Event> findEventsForPerson(@PathVariable Long id, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date start, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date end) {
 
@@ -66,31 +105,36 @@ public class EventController {
 
     @RequestMapping(value = "/delete_person")
     public void deletePerson(@RequestBody String json) {
-
-        Person person = null;
-        try {
-            person = new ObjectMapper().readValue(json, Person.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        calendarService.deletePerson(person);
+        Person sasha = new Person();
+        sasha.setId(2L);
+        sasha.setUsername("sasha");
+//        Person person = null;
+//        try {
+//            person = new ObjectMapper().readValue(json, Person.class);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        calendarService.deletePerson(sasha);
 
     }
 
     @RequestMapping(value = "/add_person")
     public void addPerson(@RequestBody String json) {
 
-        Person person = null;
-        try {
-            person = new ObjectMapper().readValue(json, Person.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        calendarService.addPerson(person);
+        Person sasha = new Person();
+        sasha.setId(2L);
+        sasha.setUsername("sasha");
+//        Person person = null;
+//        try {
+//            person = new ObjectMapper().readValue(json, Person.class);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        calendarService.addPerson(sasha);
 
     }
 
-    @RequestMapping(value = "/find_all_attenders")
+    @RequestMapping(value = "/find_all_attenders", produces="application/json")
     @ResponseBody
     public List<Person> findAllAttenders() {
 

@@ -9,7 +9,14 @@
     <!-- DispatcherServlet Context: определяет настройки одного сервлета; бины,
             которые доступны только ему -->
 
-    <bean name="calendarService" class="com.diosoft.training.project.service.CalendarServiceImp"/>
+    <bean name="calendarService" class="com.diosoft.training.project.service.CalendarServiceImp">
+
+        <property name="eventDAO" ref="eventDAOImp"/>
+        <property name="personDAO" ref="personDAOImlp"/>
+        <property name="sequenceDAO" ref="sequenceDAO"/>
+        <property name="xmlProcessor" ref="XMLProcessor"/>
+
+    </bean>
 
     <bean name="/calendarService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
         <property name="service" ref="calendarService"/>

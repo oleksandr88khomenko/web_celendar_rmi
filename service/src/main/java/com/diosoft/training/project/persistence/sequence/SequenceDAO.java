@@ -19,7 +19,7 @@ public class SequenceDAO {
 
     public Long getNextSequenceId(String key) {
 
-        Query query = new Query(Criteria.where("id").is(key));
+        Query query = new Query(Criteria.where("_id").is(key));
         Update update = new Update();
         update.inc("sequence", 1);
         FindAndModifyOptions options = new FindAndModifyOptions();
