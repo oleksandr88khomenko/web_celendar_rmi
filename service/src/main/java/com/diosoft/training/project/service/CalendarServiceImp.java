@@ -4,17 +4,19 @@ package com.diosoft.training.project.service;
  * Created by oleksandr_khomenko on 28.10.2014.
  */
 
+import com.diosoft.training.project.persistence.model.Event;
+import com.diosoft.training.project.persistence.model.Person;
 import com.diosoft.training.project.persistence.repository.EventDAO;
 import com.diosoft.training.project.persistence.repository.PersonDAO;
 import com.diosoft.training.project.persistence.repository.PersonDAOImlp;
 import com.diosoft.training.project.persistence.repository.XMLProcessor;
-import com.diosoft.training.project.persistence.model.Event;
-import com.diosoft.training.project.persistence.model.Person;
 import com.diosoft.training.project.persistence.sequence.SequenceDAO;
 import org.springframework.beans.factory.InitializingBean;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class CalendarServiceImp implements CalendarService, InitializingBean {
@@ -39,8 +41,8 @@ public class CalendarServiceImp implements CalendarService, InitializingBean {
     public void addEvent(Event event) {
 
 //       event.set_id(sequenceDAO.getNextSequenceId("events"));
-       eventDAO.add(event);
-       xmlProcessor.add(event);
+        eventDAO.add(event);
+        xmlProcessor.add(event);
     }
 
     @Override
@@ -62,7 +64,7 @@ public class CalendarServiceImp implements CalendarService, InitializingBean {
     @Override
     public List<Event> findEventsForPerson(Long id, Date start, Date end) {
 
-       return eventDAO.findEventForPerson(id, start, end);
+        return eventDAO.findEventForPerson(id, start, end);
     }
 
     @Override
@@ -122,11 +124,12 @@ public class CalendarServiceImp implements CalendarService, InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
 
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
         List<Event> listToWriteToXml = findAllEvents();
-
-        for(Event event: listToWriteToXml){
-            xmlProcessor.add(event);
+        for (Event event : listToWriteToXml) {
+            executorService.execute(new XMLProcessor("add", event));
         }
+        executorService.shutdown();
 
     }
 

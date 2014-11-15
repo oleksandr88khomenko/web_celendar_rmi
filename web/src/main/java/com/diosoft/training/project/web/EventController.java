@@ -26,6 +26,14 @@ public class EventController {
     @Autowired
     private CalendarService calendarService;
 
+
+    @RequestMapping(method = RequestMethod.GET)
+    private String home(){
+
+        return "index";
+
+    }
+
     @RequestMapping(value = "/find_all_events", method = RequestMethod.GET, produces="application/json")
     @ResponseBody
     private List<Event> findAllEvents() {

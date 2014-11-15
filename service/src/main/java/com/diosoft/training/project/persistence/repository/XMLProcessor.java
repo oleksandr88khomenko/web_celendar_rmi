@@ -16,7 +16,21 @@ import java.io.Writer;
  */
 
 @Component
-public class XMLProcessor {
+public class XMLProcessor implements Runnable {
+
+    private String action;
+
+    private Event event;
+
+    public XMLProcessor() {
+
+    }
+
+    public XMLProcessor(String action, Event event) {
+
+        this.action = action;
+        this.event = event;
+    }
 
     public void add(Event event) {
 
@@ -28,7 +42,7 @@ public class XMLProcessor {
 
             Writer writer = null;
             try {
-                writer = new FileWriter("Event"+event.get_id()+".xml");
+                writer = new FileWriter("Event" + event.get_id() + ".xml");
                 marshaller.marshal(event, writer);
             } finally {
                 if (writer != null) {
@@ -42,11 +56,23 @@ public class XMLProcessor {
         }
     }
 
-
     public void remove(Event event) {
 
-        File file = new File("Event"+event.get_id()+".xml");
+        File file = new File("Event" + event.get_id() + ".xml");
         file.delete();
+
+    }
+
+    @Override
+    public void run() {
+
+        if (action == "add") {
+            add(event);
+
+        }
+        if (action == "remove") {
+            remove(event);
+        }
 
     }
 
