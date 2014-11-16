@@ -15,6 +15,7 @@ import java.util.List;
 @Repository
 public class PersonDAOImlp implements PersonDAO{
 
+    //local code review (vtegza): create test with mockito @ 11/16/2014
     @Autowired
     private MongoTemplate mongoTemplate;
 

@@ -18,9 +18,11 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-
+//local code review (vtegza): create tests @ 11/16/2014
+//local code review (vtegza): stick to one type of bean definition with annotations or with xml - but not both @ 11/16/2014
 public class CalendarServiceImp implements CalendarService, InitializingBean {
 
+    //local code review (vtegza): prefer constructor repository setting @ 11/16/2014
     private EventDAO eventDAO;
 
     private SequenceDAO sequenceDAO;
@@ -129,6 +131,7 @@ public class CalendarServiceImp implements CalendarService, InitializingBean {
         for (Event event : listToWriteToXml) {
             executorService.execute(new XMLProcessor("add", event));
         }
+        //local code review (vtegza): there is method - awaitTermination, could be useful if you want to wait when all execution is completed @ 11/16/2014
         executorService.shutdown();
 
     }

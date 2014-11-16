@@ -20,6 +20,8 @@ import java.util.List;
 /**
  * Created by oleksandr_khomenko on 28.10.2014.
  */
+//local code review (vtegza): add maven dependency on service @ 11/16/2014
+//local code review (vtegza): clean up code @ 11/16/2014
 @Controller
 public class EventController {
 

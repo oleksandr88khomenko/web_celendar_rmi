@@ -23,7 +23,7 @@ public class Event implements Serializable {
     private Long id;
     private String title;
     private String description;
-
+    //local code review (vtegza): separate Wrapper for xml, data store nad business layer @ 11/16/2014
     @DBRef
     private List<Person> attenders;
     private Date dateFrom;
@@ -91,6 +91,8 @@ public class Event implements Serializable {
                 '}';
     }
 
+
+    //local code review (vtegza): why id is not part of equals? @ 11/16/2014
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -106,6 +108,7 @@ public class Event implements Serializable {
         return true;
     }
 
+    //local code review (vtegza): why id is not part of hashcode? @ 11/16/2014
     @Override
     public int hashCode() {
         int result = title.hashCode();

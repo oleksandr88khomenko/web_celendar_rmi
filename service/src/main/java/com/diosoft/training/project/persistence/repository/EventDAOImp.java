@@ -14,6 +14,7 @@ import java.util.List;
  * Created by oleksandr_khomenko on 29.10.2014.
  */
 @Repository
+//local code review (vtegza): tests @ 11/16/2014
 public class EventDAOImp implements EventDAO {
 
     @Autowired
@@ -38,11 +39,14 @@ public class EventDAOImp implements EventDAO {
 
     @Override
     public void delete(Long id) {
-        mongoTemplate.remove(Query.query(Criteria.where("id").is(id)), Event.class);
+        //local code review (vtegza): extract methods to keep code more readable @ 11/16/2014
+        Query query = Query.query(Criteria.where("id").is(id));
+        mongoTemplate.remove(query, Event.class);
     }
 
     @Override
     public List<Event> findEventForPerson(Long id, Date start, Date end) {
+        //local code review (vtegza): there are an conventions for line lenght - the classic is 90, and more regular is 180 @ 11/16/2014
         return mongoTemplate.find(new Query(Criteria.where("attenders.$id").is(id).and("start").gt(start).and("end").lt(end)), Event.class);
 
     }
