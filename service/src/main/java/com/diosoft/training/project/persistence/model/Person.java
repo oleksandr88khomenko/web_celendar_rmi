@@ -28,7 +28,7 @@ public class Person implements Serializable {
         return id;
     }
 
-    public void setId(Long _id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

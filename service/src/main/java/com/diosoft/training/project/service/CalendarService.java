@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * Created by oleksandr_khomenko on 28.10.2014.
  */
+//local code review (vtegza): try to create service and web application, that would communicate over rmi @ 11/16/2014
 public interface CalendarService {
 
     List<Event> findAllEvents();

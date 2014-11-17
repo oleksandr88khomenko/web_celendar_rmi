@@ -18,7 +18,6 @@ public class SequenceDAO {
     private MongoOperations mongoOperations;
 
     public Long getNextSequenceId(String key) {
-
         Query query = new Query(Criteria.where("_id").is(key));
         Update update = new Update();
         update.inc("sequence", 1);

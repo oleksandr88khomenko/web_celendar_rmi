@@ -10,10 +10,9 @@
             которые доступны только ему -->
 
     <bean name="calendarService" class="com.diosoft.training.project.service.CalendarServiceImp">
-
-        <property name="eventDAO" ref="eventDAOImp"/>
-        <property name="personDAO" ref="personDAOImlp"/>
-        <property name="sequenceDAO" ref="sequenceDAO"/>
+        <constructor-arg ref="eventDAOImp"/>
+        <constructor-arg ref="personDAOImlp"/>
+        <constructor-arg ref="sequenceDAO"/>
         <property name="xmlProcessor" ref="XMLProcessor"/>
 
     </bean>
@@ -22,7 +21,5 @@
         <property name="service" ref="calendarService"/>
         <property name="serviceInterface" value="com.diosoft.training.project.service.CalendarService"/>
     </bean>
-
-
 
 </beans>

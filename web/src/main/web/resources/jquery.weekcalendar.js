@@ -17,7 +17,6 @@
  *
  *   If you're after a monthly calendar plugin, check out http://arshaw.com/fullcalendar/
  */
-
 (function($) {
 
     $.widget("ui.weekCalendar", {

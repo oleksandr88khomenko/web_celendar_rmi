@@ -23,7 +23,7 @@ public class Event implements Serializable {
     private Long id;
     private String title;
     private String description;
-
+    //local code review (vtegza): separate Wrapper for xml, data store nad business layer @ 11/16/2014
     @DBRef
     private List<Person> attenders;
     private Date dateFrom;
@@ -80,12 +80,13 @@ public class Event implements Serializable {
         this.attenders = attenders;
     }
 
-
     @Override
     public String toString() {
         return "Event{" +
-                "title='" + title + '\'' +
+                "id=" + id +
+                ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
+                ", attenders=" + attenders +
                 ", dateFrom=" + dateFrom +
                 ", dateTo=" + dateTo +
                 '}';
@@ -98,9 +99,11 @@ public class Event implements Serializable {
 
         Event event = (Event) o;
 
+        if (!attenders.equals(event.attenders)) return false;
         if (!dateFrom.equals(event.dateFrom)) return false;
         if (!dateTo.equals(event.dateTo)) return false;
         if (!description.equals(event.description)) return false;
+        if (!id.equals(event.id)) return false;
         if (!title.equals(event.title)) return false;
 
         return true;
@@ -108,8 +111,10 @@ public class Event implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = title.hashCode();
+        int result = id.hashCode();
+        result = 31 * result + title.hashCode();
         result = 31 * result + description.hashCode();
+        result = 31 * result + attenders.hashCode();
         result = 31 * result + dateFrom.hashCode();
         result = 31 * result + dateTo.hashCode();
         return result;

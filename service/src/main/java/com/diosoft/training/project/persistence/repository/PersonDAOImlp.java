@@ -15,6 +15,7 @@ import java.util.List;
 @Repository
 public class PersonDAOImlp implements PersonDAO{
 
+    //local code review (vtegza): create test with mockito @ 11/16/2014
     @Autowired
     private MongoTemplate mongoTemplate;
 
@@ -30,6 +31,6 @@ public class PersonDAOImlp implements PersonDAO{
 
     @Override
     public void delete(Long id) {
-       mongoTemplate.remove(Query.query(Criteria.where("id").is(id)), Person.class);
+       mongoTemplate.remove(Query.query(Criteria.where("_id").is(id)), Person.class);
     }
 }
