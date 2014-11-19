@@ -1,5 +1,7 @@
 package com.diosoft.training.project.persistence.model.xml;
 
+import com.diosoft.training.project.persistence.model.Person;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
@@ -13,6 +15,18 @@ public class PersonAdapter implements Serializable {
     private String username;
     private String password;
     private String email;
+
+    public PersonAdapter() {
+
+    }
+
+    public PersonAdapter(Person person) {
+        this.username = person.getUsername();
+        this.password = person.getPassword();
+        this.email = person.getEmail();
+        this.id = person.getId();
+
+    }
 
     public String getEmail() {
         return email;

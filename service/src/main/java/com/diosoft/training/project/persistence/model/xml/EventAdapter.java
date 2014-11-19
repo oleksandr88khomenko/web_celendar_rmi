@@ -1,10 +1,14 @@
 package com.diosoft.training.project.persistence.model.xml;
 
+import com.diosoft.training.project.persistence.model.Event;
+import com.diosoft.training.project.persistence.model.Person;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +26,22 @@ public class EventAdapter implements Serializable {
     private Date dateFrom;
     private Date dateTo;
 
+    public EventAdapter() {
+
+    }
+
+    public EventAdapter(Event event) {
+
+        this.title = event.getTitle();
+        this.id = event.get_id();
+        this.description = event.getDescription();
+        this.attenders = new ArrayList<PersonAdapter>();
+        if (event.getAttenders() != null) {
+            for (Person person : event.getAttenders()) {
+                this.attenders.add(new PersonAdapter(person));
+            }
+        }
+    }
 
     public Long get_id() {
         return id;
