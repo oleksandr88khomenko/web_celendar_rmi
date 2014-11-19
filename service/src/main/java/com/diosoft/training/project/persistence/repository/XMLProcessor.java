@@ -1,6 +1,7 @@
 package com.diosoft.training.project.persistence.repository;
 
 import com.diosoft.training.project.persistence.model.Event;
+import com.diosoft.training.project.persistence.model.xml.EventAdapter;
 import org.springframework.stereotype.Component;
 
 import javax.xml.bind.JAXBContext;
@@ -33,9 +34,9 @@ public class XMLProcessor implements Runnable {
 
     public void add(Event event) {
         System.out.println("Xmlprocessor:add event called:" + ++count);
-
+        EventAdapter eventAdapter = new EventAdapter(event);
         try {
-            JAXBContext context = JAXBContext.newInstance(Event.class);
+            JAXBContext context = JAXBContext.newInstance(EventAdapter.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.marshal(event, System.out);
@@ -52,7 +53,6 @@ public class XMLProcessor implements Runnable {
 
         File file = new File("Event" + event.get_id() + ".xml");
         file.delete();
-
 
     }
 
