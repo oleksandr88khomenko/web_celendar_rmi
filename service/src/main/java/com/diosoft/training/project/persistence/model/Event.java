@@ -8,15 +8,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Document
-@XmlRootElement
 public class Event implements Serializable {
 
     @Id
@@ -70,8 +66,6 @@ public class Event implements Serializable {
         return dateTo;
     }
 
-    @XmlElementWrapper(name="attenders")
-    @XmlElement(name="attender")
     public List<Person> getAttenders() {
         return attenders;
     }

@@ -3,11 +3,9 @@ package com.diosoft.training.project.persistence.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 @Document
-@XmlRootElement
 public class Person implements Serializable {
 
     @Id
