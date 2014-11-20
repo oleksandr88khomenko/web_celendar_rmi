@@ -19,6 +19,13 @@ public class PersonDAOImlp implements PersonDAO{
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    public PersonDAOImlp() {
+
+    }
+
+    public PersonDAOImlp(MongoTemplate mongoTemplate) {
+        this.mongoTemplate = mongoTemplate;
+    }
     @Override
     public List<Person> findAll() {
         return mongoTemplate.findAll(Person.class);

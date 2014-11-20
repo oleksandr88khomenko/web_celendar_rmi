@@ -32,10 +32,11 @@ public class CalendarServiceImp implements CalendarService, InitializingBean {
     public CalendarServiceImp() {
     }
 
-    public CalendarServiceImp(EventDAOImp eventDAOImp, PersonDAOImlp personDAOImlp, SequenceDAO sequenceDAO) {
+    public CalendarServiceImp(EventDAOImp eventDAOImp, PersonDAOImlp personDAOImlp, SequenceDAO sequenceDAO, XMLProcessor xmlProcessor) {
         this.eventDAO = eventDAOImp;
         this.sequenceDAO = sequenceDAO;
         this.personDAO = personDAOImlp;
+        this.xmlProcessor = xmlProcessor;
     }
 
     @Override
@@ -93,14 +94,6 @@ public class CalendarServiceImp implements CalendarService, InitializingBean {
 
         personDAO.delete(person.getId());
 
-    }
-
-    public void setXmlProcessor(XMLProcessor xmlProcessor) {
-        this.xmlProcessor = xmlProcessor;
-    }
-
-    public XMLProcessor getXmlProcessor() {
-        return xmlProcessor;
     }
 
     @Override
