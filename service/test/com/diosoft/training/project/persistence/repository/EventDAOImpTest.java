@@ -32,6 +32,7 @@ public class EventDAOImpTest {
         EventDAO eventDAO = new EventDAOImp(mongoTemplate);
         when(eventDAO.findAll()).thenReturn(expList);
         List<Event> expected = eventDAO.findAll();
+        //local code review (vtegza): no need in times(1), it is used by default @ 12/6/2014
         verify(mongoTemplate, times(1)).findAll(Event.class);
 
   }
@@ -46,6 +47,7 @@ public class EventDAOImpTest {
         when(mongoTemplate.findById(expectedEvent.get_id(), Event.class)).thenReturn(expectedEvent);
         Event result = mongoTemplate.findById(expectedEvent.get_id(), Event.class);
         Assert.assertEquals(expectedEvent, result);
+        //local code review (vtegza): no need in times(1), it is used by default @ 12/6/2014
         verify(mongoTemplate, times(1)).save(expectedEvent);
 
     }
@@ -61,6 +63,7 @@ public class EventDAOImpTest {
         eventDAO.delete(inputEvent.get_id());
         when(mongoTemplate.findById(inputEvent.get_id(), Event.class)).thenReturn(expectedEvent);
         Event result = mongoTemplate.findById(inputEvent.get_id(), Event.class);
+        //local code review (vtegza): do static imports @ 12/6/2014
         Assert.assertEquals(expectedEvent, result);
 
     }

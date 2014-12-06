@@ -49,6 +49,7 @@ public class EventController {
         sasha.setUsername("sasha");
         List<Person> list = Arrays.asList(sasha);
 
+        //local code review (vtegza): use fine naming @ 12/6/2014
         Event event_ = new Event();
         event_.setDateFrom(new Date(1416142089917l));
         event_.setDateTo(new Date(1416143192915l));

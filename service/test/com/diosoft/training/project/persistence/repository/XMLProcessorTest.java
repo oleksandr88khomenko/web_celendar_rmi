@@ -62,6 +62,7 @@ public class XMLProcessorTest {
         xmlProcessor = new XMLProcessor();
         xmlProcessor.add(input);
         xmlProcessor.remove(input);
+        //local code review (vtegza): this is more like integration test, consider this @ 12/6/2014
         file = new File("Event" + input.get_id() + ".xml");
         Assert.assertEquals(file.exists(), false);
 

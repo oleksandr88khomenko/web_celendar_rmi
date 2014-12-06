@@ -33,6 +33,7 @@ public class XMLProcessor implements Runnable {
     }
 
     public void add(Event event) {
+        //local code review (vtegza): clean up code @ 12/6/2014
         System.out.println("Xmlprocessor:add event called:" + ++count);
         EventAdapter eventAdapter = new EventAdapter(event);
         try {

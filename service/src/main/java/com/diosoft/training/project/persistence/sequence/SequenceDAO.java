@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
  * Created by oleksandr_khomenko on 07.11.2014.
  */
 @Repository
+//local code review (vtegza): add interface @ 12/6/2014
 public class SequenceDAO {
 
     @Autowired

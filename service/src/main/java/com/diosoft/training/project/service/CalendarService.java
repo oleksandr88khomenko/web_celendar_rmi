@@ -11,6 +11,7 @@ import java.util.List;
  * Created by oleksandr_khomenko on 28.10.2014.
  */
 //local code review (vtegza): try to create service and web application, that would communicate over rmi @ 11/16/2014
+//local code review (vtegza): interface should be isolated from3rd party libraries, ex: Event class is depended on springframework.data, client should not know about such dependency @ 12/6/2014
 public interface CalendarService {
 
     List<Event> findAllEvents();
