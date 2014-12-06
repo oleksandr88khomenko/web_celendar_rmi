@@ -1,15 +1,13 @@
 package com.diosoft.training.project.persistence.repository;
 
 import com.diosoft.training.project.persistence.model.Event;
+import com.diosoft.training.project.persistence.model.xml.EventAdapter;
 import org.springframework.stereotype.Component;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
 
 /**
  * Created by oleksandr_khomenko on 14.11.2014.
@@ -22,6 +20,8 @@ public class XMLProcessor implements Runnable {
 
     private Event event;
 
+    static int count = 0;
+
     public XMLProcessor() {
 
     }
@@ -33,25 +33,18 @@ public class XMLProcessor implements Runnable {
     }
 
     public void add(Event event) {
-
+        System.out.println("Xmlprocessor:add event called:" + ++count);
+        EventAdapter eventAdapter = new EventAdapter(event);
         try {
-            JAXBContext context = JAXBContext.newInstance(Event.class);
+            JAXBContext context = JAXBContext.newInstance(EventAdapter.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.marshal(event, System.out);
 
-            Writer writer = null;
-            try {
-                writer = new FileWriter("Event" + event.get_id() + ".xml");
-                marshaller.marshal(event, writer);
-            } finally {
-                if (writer != null) {
-                    writer.close();
-                }
-            }
+            File file = new File("Event" + event.get_id() + ".xml");
+            marshaller.marshal(event, file);
+
         } catch (JAXBException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
     }

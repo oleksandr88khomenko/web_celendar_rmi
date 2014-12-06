@@ -8,7 +8,6 @@ import com.diosoft.training.project.persistence.model.Person;
 import com.diosoft.training.project.service.CalendarService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,32 +45,17 @@ public class EventController {
     public void addEvent(@RequestBody String json) {
 
         Person sasha = new Person();
-        sasha.setId(2L);
+        sasha.setId(4L);
         sasha.setUsername("sasha");
         List<Person> list = Arrays.asList(sasha);
 
         Event event_ = new Event();
-        event_.set_id(3L);
-        event_.setDateFrom(new Date());
-        event_.setDateTo(new Date());
+        event_.setDateFrom(new Date(1416142089917l));
+        event_.setDateTo(new Date(1416143192915l));
         event_.setDescription("first event");
         event_.setTitle("event");
         event_.setAttenders(list);
-        Event event2 = new Event();
-        event2.set_id(2L);
-        event2.setDateFrom(new Date());
-        event2.setDateTo(new Date());
-        event2.setDescription("first event");
-        event2.setTitle("event");
-        event2.setAttenders(list);
 
-        Event event3 = new Event();
-        event3.set_id(1L);
-        event3.setDateFrom(new Date());
-        event3.setDateTo(new Date());
-        event3.setDescription("first event");
-        event3.setTitle("event");
-        event3.setAttenders(list);
 //        try {
 //            event = new ObjectMapper().readValue(json, Event.class);
 //        } catch (IOException e) {
@@ -97,7 +81,7 @@ public class EventController {
     public void deleteEvent(@RequestBody String json) {
 
         Event event_ = new Event();
-        event_.set_id(3L);
+        event_.set_id(10L);
         event_.setDateFrom(new Date());
         event_.setDateTo(new Date());
         event_.setDescription("first event");
@@ -107,16 +91,16 @@ public class EventController {
 
     @RequestMapping(value = "/find_events_for_person/{id}/{start}/{end}", produces="application/json" )
     @ResponseBody
-    public List<Event> findEventsForPerson(@PathVariable Long id, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date start, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date end) {
+    public List<Event> findEventsForPerson(@PathVariable Long id, @PathVariable Long start, @PathVariable Long end) {
 
-        return calendarService.findEventsForPerson(id, start, end);
+        return calendarService.findEventsForPerson(id, new Date(start), new Date(end));
 
     }
 
     @RequestMapping(value = "/delete_person")
     public void deletePerson(@RequestBody String json) {
         Person sasha = new Person();
-        sasha.setId(2L);
+        sasha.setId(5L);
         sasha.setUsername("sasha");
 //        Person person = null;
 //        try {

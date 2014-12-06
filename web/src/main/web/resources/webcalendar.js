@@ -2,13 +2,11 @@
  * Created by oleksandr_khomenko on 04.11.2014.
  */
 
+
 $(document).ready(function () {
 
     var $calendar = $('#calendar');
     var id = 0;
-    var year = new Date().getFullYear();
-    var month = new Date().getMonth();
-    var day = new Date().getDate();
 
 
 //        {
@@ -215,30 +213,37 @@ $(document).ready(function () {
 
     }
 
-    function getEventData() {
-
+        function getEventData() {
+        var year = new Date().getFullYear();
+        var month = new Date().getMonth();
+        var day = new Date().getDate();
 
 //        return  eventDb().get();
 
 
-//            {
-//                "id": 1,
-//                "start": new Date(year, month, day, 12),
-//                "end": new Date(year, month, day, 13, 30),
-//                "title": "Lunch with Mike"
-//            },
-//            {
-//                "id": 2,
-//                "start": new Date(year, month, day, 14),
-//                "end": new Date(year, month, day, 14, 45),
-//                "title": "Dev Meeting"
-//            },
-//            {
-//                "id": 3,
-//                "start": new Date(year, month, day + 1, 17),
-//                "end": new Date(year, month, day + 1, 17, 45),
-//                "title": "Hair cut"
-//            }]}
+        return { events: [
+            {
+                "id": 1,
+                "start": new Date(year, month, day, 12),
+                "end": new Date(year, month, day, 13, 30),
+                "title": "Lunch with Mike"
+            },
+            {
+                "id": 2,
+                "start": new Date(year, month, day, 14),
+                "end": new Date(year, month, day, 14, 45),
+                "title": "Dev Meeting"
+            },
+            {
+                "id": 3,
+                "start": new Date(year, month, day + 1, 17),
+                "end": new Date(year, month, day + 1, 17, 45),
+                "title": "Hair cut"
+            }
+        ]
+        };
+    }
+
 //                {
 //                    "id": 4,
 //                    "start": new Date(year, month, day - 1, 8),
@@ -260,9 +265,6 @@ $(document).ready(function () {
 //                }
 //
 //            ]
-
-
-    }
 
 
     /*
@@ -318,6 +320,7 @@ $(document).ready(function () {
         }
 
     });
+
 
     $('#btn-add').click(function () {
         $('#select-from option:selected').each(function () {

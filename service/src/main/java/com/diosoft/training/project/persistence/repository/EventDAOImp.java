@@ -20,6 +20,13 @@ public class EventDAOImp implements EventDAO {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    public EventDAOImp() {
+
+    }
+
+    public EventDAOImp(MongoTemplate mongoTemplate) {
+        this.mongoTemplate = mongoTemplate;
+    }
 
     @Override
     public List<Event> findAll() {

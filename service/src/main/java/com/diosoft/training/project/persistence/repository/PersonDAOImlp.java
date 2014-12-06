@@ -19,6 +19,13 @@ public class PersonDAOImlp implements PersonDAO{
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    public PersonDAOImlp() {
+
+    }
+
+    public PersonDAOImlp(MongoTemplate mongoTemplate) {
+        this.mongoTemplate = mongoTemplate;
+    }
     @Override
     public List<Person> findAll() {
         return mongoTemplate.findAll(Person.class);
@@ -31,6 +38,6 @@ public class PersonDAOImlp implements PersonDAO{
 
     @Override
     public void delete(Long id) {
-       mongoTemplate.remove(Query.query(Criteria.where("id").is(id)), Person.class);
+       mongoTemplate.remove(Query.query(Criteria.where("_id").is(id)), Person.class);
     }
 }

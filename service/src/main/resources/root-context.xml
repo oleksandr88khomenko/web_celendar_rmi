@@ -27,8 +27,8 @@
     <!-- Файл с настройками ресурсов для работы с данными (Data Access Resources) -->
     <import resource="data.xml"/>
 
-    <!--Импорт бинов для сервлета-->
-    <import resource="servlet-context.xml"/>
+    <!--&lt;!&ndash;Импорт бинов для сервлета&ndash;&gt;-->
+    <!--<import resource="servlet-context.xml"/>-->
 
 
 </beans>

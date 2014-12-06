@@ -1,18 +1,32 @@
-package com.diosoft.training.project.persistence.model;
+package com.diosoft.training.project.persistence.model.xml;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.diosoft.training.project.persistence.model.Person;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
-@Document
-public class Person implements Serializable {
+/**
+ * Created by oleksandr_khomenko on 20.11.2014.
+ */
+@XmlRootElement
+public class PersonAdapter implements Serializable {
 
-    @Id
     private Long id;
     private String username;
     private String password;
     private String email;
+
+    public PersonAdapter() {
+
+    }
+
+    public PersonAdapter(Person person) {
+        this.username = person.getUsername();
+        this.password = person.getPassword();
+        this.email = person.getEmail();
+        this.id = person.getId();
+
+    }
 
     public String getEmail() {
         return email;
@@ -51,12 +65,12 @@ public class Person implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Person person = (Person) o;
+        PersonAdapter that = (PersonAdapter) o;
 
-        if (!id.equals(person.id)) return false;
-        if (!email.equals(person.email)) return false;
-        if (!password.equals(person.password)) return false;
-        if (!username.equals(person.username)) return false;
+        if (!email.equals(that.email)) return false;
+        if (!id.equals(that.id)) return false;
+        if (!password.equals(that.password)) return false;
+        if (!username.equals(that.username)) return false;
 
         return true;
     }
@@ -72,12 +86,12 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "_id=" + id +
+        return "PersonAdapter{" +
+                "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }
-
 }
+
